@@ -37,11 +37,11 @@ namespace SafeAuto.Kata.Services
                         {
                             _logger.LogDebug("Calculating trip details");
 
-                            driver.TotalDistanceTraveled += trip.MilesDriven.Value;
-                            driver.TotalTripTime += trip.TripTime.Value;
+                            driver.TotalDistanceTraveled += trip.MilesDriven;
+                            driver.TotalTripTime += trip.TripTime;
                         }
                         else
-                            _logger.LogWarning("Trip does not meet speed criteria");
+                            _logger.LogInformation("Trip does not meet speed criteria");
                     }
                 }
             }
