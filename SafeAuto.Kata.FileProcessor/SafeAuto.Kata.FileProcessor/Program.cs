@@ -21,12 +21,11 @@ namespace SafeAuto.Kata.FileProcessor
             var printService = serviceProvider.GetRequiredService<IPrintService>();
 
             logger.LogDebug("Starting Application");
-            var fp = @"C:\Project\Sandbox\safeAutoKata\exampleFile.txt";
+            //var fp = @"C:\Project\Sandbox\safeAutoKata\exampleFile.txt";
 
-            Console.Write("Enter File Path: " + fp);
+            Console.Write("Enter File Path: ");
+            var fp = Console.ReadLine();
             Console.WriteLine();
-
-            //var fp = Console.ReadLine();
 
             if (File.Exists(fp))
             {
