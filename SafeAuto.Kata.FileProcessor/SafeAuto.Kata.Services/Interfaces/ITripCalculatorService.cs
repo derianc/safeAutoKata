@@ -5,6 +5,6 @@ namespace SafeAuto.Kata.Services.Interfaces
 {
     public interface ITripCalculatorService
     {
-        List<Output> CalculateDistanceAndSpeed();
+        List<Driver> CalculateDriverTripDetails();
     }
 }

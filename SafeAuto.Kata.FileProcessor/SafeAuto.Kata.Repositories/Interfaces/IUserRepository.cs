@@ -7,8 +7,8 @@ namespace SafeAuto.Kata.Repositories.Interfaces
     {
         bool IsUserRegistered(string userName);
         void RegisterNewUser(string userName);
-        void AddUserDetails(TripDetails tripDetails);
-        RegisteredUser GetRegisteredUser(string userName);
-        List<RegisteredUser> GetAllRegisteredUsers();
+        void AddUserDetails(Trip tripDetails);
+        Driver GetRegisteredUser(string userName);
+        List<Driver> GetAllRegisteredUsers();
     }
 }

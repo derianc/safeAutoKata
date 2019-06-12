@@ -1,5 +1,6 @@
 ﻿using SafeAuto.Kata.Data;
 using SafeAuto.Kata.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -7,19 +8,17 @@ namespace SafeAuto.Kata.Services
 {
     public class PrintService : IPrintService
     {
-        public List<string> PrintOutput(List<Output> tripDetails)
+        public void PrintDriverTripDetails(List<Driver> drivers)
         {
-            var retVal = new List<string>();
-
-            foreach(var trip in tripDetails.OrderByDescending(t => t.DistanceTraveled))
+            // sort by total distance traveled
+            foreach(var driver in drivers.OrderByDescending(t => t.TotalDistanceTraveled))
             {
-                var printString = $"{trip.UserName}: {trip.DistanceTraveled} miles ";
-                printString += trip.MilesPerHour > 0 ? $"@ { trip.MilesPerHour} mph" : string.Empty;
+                var printString = $"{driver.UserName}: { Convert.ToInt32(driver.TotalDistanceTraveled) } miles";
+                printString += driver.AvgSpeedInMph > 0 ? $" @ { Convert.ToInt32(driver.AvgSpeedInMph) } mph" : string.Empty;
 
-                retVal.Add(printString);
+                // output to console
+                Console.WriteLine(printString);
             }
-
-            return retVal;
         }
     }
 }

@@ -32,5 +32,20 @@ namespace SafeAuto.Kata.FileProcessor.Config
 
             return serviceProvider;
         }
+
+        public static IFileReaderService GetFileReaderService(this ServiceProvider serviceProvider)
+        {
+            return serviceProvider.GetRequiredService<IFileReaderService>();
+        }
+
+        public static ITripCalculatorService GetTripCalculatorService(this ServiceProvider serviceProvider)
+        {
+            return serviceProvider.GetRequiredService<ITripCalculatorService>();
+        }
+
+        public static IPrintService GetPrintService(this ServiceProvider serviceProvider)
+        {
+            return serviceProvider.GetRequiredService<IPrintService>();
+        }
     }
 }

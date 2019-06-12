@@ -23,13 +23,5 @@ namespace SafeAuto.Kata.Services.Extensions
             logger.LogError($"Formatting Error: {line}");
             throw new FormatException("Formatting Error");
         }
-
-        public static bool IsTripValid(this TripDetails tripDetails)
-        {
-            // if avg speed is less than 5 or greater than 100, trip is invalid
-            return !tripDetails.IsAvgSpeedLessThan5Mph() ||
-                   !tripDetails.IsAvgSpeedGreaterThan100Mph();
-
-        }
     }
 }

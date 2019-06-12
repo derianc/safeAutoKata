@@ -9,7 +9,7 @@ namespace SafeAuto.Kata.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly ILogger<UserRepository> _logger;
-        private List<RegisteredUser> _registeredUsers = new List<RegisteredUser>();
+        private List<Driver> _registeredUsers = new List<Driver>();
 
         public UserRepository(ILoggerFactory loggerFactory)
         {
@@ -26,7 +26,7 @@ namespace SafeAuto.Kata.Repositories
 
         public void RegisterNewUser(string userName)
         {
-            var newUser = new RegisteredUser
+            var newUser = new Driver
             {
                 UserName = userName
             };
@@ -36,12 +36,12 @@ namespace SafeAuto.Kata.Repositories
             _registeredUsers.Add(newUser);
         }
 
-        public void AddUserDetails(TripDetails tripDetails)
+        public void AddUserDetails(Trip tripDetails)
         {
             throw new System.NotImplementedException();
         }
 
-        public RegisteredUser GetRegisteredUser(string userName)
+        public Driver GetRegisteredUser(string userName)
         {
             _logger.LogDebug($"Returning user, {userName}, from repository");
 
@@ -53,7 +53,7 @@ namespace SafeAuto.Kata.Repositories
             return null;
         }
 
-        public List<RegisteredUser> GetAllRegisteredUsers()
+        public List<Driver> GetAllRegisteredUsers()
         {
             _logger.LogDebug($"Returning all users");
 

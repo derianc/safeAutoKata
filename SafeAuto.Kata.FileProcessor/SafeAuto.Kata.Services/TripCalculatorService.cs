@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SafeAuto.Kata.Data;
 using SafeAuto.Kata.Repositories.Interfaces;
+using SafeAuto.Kata.Services.Extensions;
 using SafeAuto.Kata.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -19,39 +20,33 @@ namespace SafeAuto.Kata.Services
             _logger = loggerFactory.CreateLogger<TripCalculatorService>();
         }
 
-        public List<Output> CalculateDistanceAndSpeed()
+        public List<Driver> CalculateDriverTripDetails()
         {
-            List<Output> outputList = new List<Output>();
+            var driverList = _userRepository.GetAllRegisteredUsers();
 
-            foreach(var user in _userRepository.GetAllRegisteredUsers())
+            foreach(var driver in driverList)
             {
-                double? totalTime = 0;
-                double? totalDistance = 0;
-
-                if (user.TripDetails.Count > 0)
+                if (driver.TripList.Count > 0)
                 {
-                    foreach (var detail in user.TripDetails)
+                    foreach (var trip in driver.TripList)
                     {
-                        totalDistance += detail.MilesDriven;
-                        totalTime += (detail.StopTime.Value - detail.StartTime.Value).TotalHours;
+                        // verify avg trip speed > 5 and < 100
+                        _logger.LogDebug("Verify trip meets speed criteria");
+
+                        if (trip.IsValidSpeed())
+                        {
+                            _logger.LogDebug("Calculating trip details");
+
+                            driver.TotalDistanceTraveled += trip.MilesDriven.Value;
+                            driver.TotalTripTime += trip.TripTime.Value;
+                        }
+                        else
+                            _logger.LogWarning("Trip does not meet speed criteria");
                     }
-
-                    var mph = totalDistance.Value / totalTime.Value;
-
-                    var output = new Output()
-                    {
-                        UserName = user.UserName,
-                        DistanceTraveled = Convert.ToInt32(totalDistance.Value),
-                        MilesPerHour = Convert.ToInt32(mph)
-                    };
-
-                    outputList.Add(output);
                 }
-                else
-                    outputList.Add(new Output { UserName = user.UserName });
             }
 
-            return outputList;
+            return driverList;
         }
     }
 }

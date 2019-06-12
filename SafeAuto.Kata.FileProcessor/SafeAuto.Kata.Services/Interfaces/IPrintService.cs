@@ -5,6 +5,6 @@ namespace SafeAuto.Kata.Services.Interfaces
 {
     public interface IPrintService
     {
-        List<string> PrintOutput(List<Output> tripDetails);
+        void PrintDriverTripDetails(List<Driver> drivers);
     }
 }

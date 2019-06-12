@@ -14,11 +14,10 @@ namespace SafeAuto.Kata.FileProcessor
             // configure DI Containers
             var serviceProvider = Setup.ConfigureDependencyInjection();
 
-            // create concrete classes from
             var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
-            var fileReaderService = serviceProvider.GetRequiredService<IFileReaderService>();
-            var tripCalculatorService = serviceProvider.GetRequiredService<ITripCalculatorService>();
-            var printService = serviceProvider.GetRequiredService<IPrintService>();
+            var fileReaderService = serviceProvider.GetFileReaderService();
+            var tripCalcService = serviceProvider.GetTripCalculatorService();
+            var printService = serviceProvider.GetPrintService();
 
             logger.LogDebug("Starting Application");
             //var fp = @"C:\Project\Sandbox\safeAutoKata\exampleFile.txt";
@@ -33,14 +32,10 @@ namespace SafeAuto.Kata.FileProcessor
                 fileReaderService.ProcessFile(fp);
 
                 // cacluclate trip details
-                var tripDetails = tripCalculatorService.CalculateDistanceAndSpeed();
+                var driverTripDetails = tripCalcService.CalculateDriverTripDetails();
 
                 // get print output
-                var printOutput = printService.PrintOutput(tripDetails);
-
-                // print to console.
-                foreach (var line in printOutput)
-                    Console.WriteLine(line);
+                printService.PrintDriverTripDetails(driverTripDetails);
 
                 // await input
                 Console.ReadLine();

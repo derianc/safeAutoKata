@@ -7,20 +7,25 @@ namespace SafeAuto.Kata.Services.Extensions
 {
     public static class TripExtensions
     {
-        public static bool IsAvgSpeedLessThan5Mph(this TripDetails trip)
+        public static bool IsValidSpeed(this Trip trip)
         {
-            var mph = trip.MilesDriven / ((trip.StopTime.Value - trip.StartTime.Value).TotalHours);
+            return trip.IsAvgSpeedGreaterThan5Mph() && trip.IsAvgSpeedLessThan100Mph();
+        }
 
-            if (mph < 5)
+        private static bool IsAvgSpeedGreaterThan5Mph(this Trip trip)
+        {
+            var mph = trip.MilesDriven / trip.TripTime;
+
+            if (mph > 5)
                 return true;
             return false;
         }
 
-        public static bool IsAvgSpeedGreaterThan100Mph(this TripDetails trip)
+        private static bool IsAvgSpeedLessThan100Mph(this Trip trip)
         {
-            var mph = trip.MilesDriven / ((trip.StopTime.Value - trip.StartTime.Value).TotalHours);
+            var mph = trip.MilesDriven / trip.TripTime;
 
-            if (mph > 100)
+            if (mph < 100)
                 return true;
             return false;
         }
