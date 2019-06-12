@@ -3,7 +3,6 @@ using System.IO;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using SafeAuto.Kata.FileProcessor.Config;
-using SafeAuto.Kata.Services;
 using SafeAuto.Kata.Services.Interfaces;
 
 namespace SafeAuto.Kata.FileProcessor
@@ -12,9 +11,10 @@ namespace SafeAuto.Kata.FileProcessor
     {
         static void Main(string[] args)
         {
-            // configure DI
+            // configure DI Containers
             var serviceProvider = Setup.ConfigureDependencyInjection();
 
+            // create concrete classes from
             var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
             var fileReaderService = serviceProvider.GetRequiredService<IFileReaderService>();
             var tripCalculatorService = serviceProvider.GetRequiredService<ITripCalculatorService>();

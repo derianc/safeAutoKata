@@ -1,28 +1,23 @@
 ﻿using Microsoft.Extensions.Logging;
 using SafeAuto.Kata.Data;
 using SafeAuto.Kata.Repositories.Interfaces;
+using SafeAuto.Kata.Services.Extensions;
 using SafeAuto.Kata.Services.Interfaces;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SafeAuto.Kata.Services
 {
     public class FileReaderService : IFileReaderService
     {
         private readonly IUserRepository _userRepository;
-        private readonly IValidationService _validationService;
 
         private readonly ILogger<FileReaderService> _logger;
 
         public FileReaderService(IUserRepository userRepository,
-                                 IValidationService validationService,
                                  ILoggerFactory loggerFactory)
         {
             _userRepository = userRepository;
-            _validationService = validationService;
             _logger = loggerFactory.CreateLogger<FileReaderService>();
         }
 
@@ -45,11 +40,7 @@ namespace SafeAuto.Kata.Services
             if (controlWord == InputType.Driver.ToString())
             {
                 // verify we have the correct number of columns
-                if (lineData.Length != 2)
-                {
-                    _logger.LogError($"Formatting Error: {line}");
-                    throw new FormatException("Formatting Error");
-                }
+                lineData.IsCorrectFormatForNewUser(_logger);
 
                 var userName = lineData[1].Trim();
                 if(!_userRepository.IsUserRegistered(userName))
@@ -62,11 +53,7 @@ namespace SafeAuto.Kata.Services
             else if (controlWord == InputType.Trip.ToString())
             {
                 // verify we have the correct number of columns
-                if (lineData.Length != 5)
-                {
-                    _logger.LogError($"Formatting Error: {line}");
-                    throw new FormatException("Formatting Error");
-                }
+                lineData.IsCorrectFormatForTripDetails(_logger);
 
                 var userName = lineData[1].Trim();
                 var startTime = lineData[2].Trim();
@@ -74,7 +61,7 @@ namespace SafeAuto.Kata.Services
                 var milesDriven = lineData[4].Trim();
 
                 var existingUser = _userRepository.GetRegisteredUser(userName);
-                if(existingUser != null)
+                if (existingUser != null)
                 {
                     var tripDetails = new TripDetails
                     {
@@ -83,7 +70,7 @@ namespace SafeAuto.Kata.Services
                         MilesDriven = Convert.ToDouble(milesDriven)
                     };
 
-                    if (_validationService.IsTripValid(tripDetails))
+                    if (tripDetails.IsTripValid())
                     {
                         _logger.LogDebug($"Adding trip details for user: {userName} || {startTime} || {stopTime} || {milesDriven}");
                         existingUser.TripDetails.Add(tripDetails);
@@ -91,7 +78,12 @@ namespace SafeAuto.Kata.Services
                     else
                     {
                         _logger.LogWarning($"Invalid trip {tripDetails}");
-                    }                    
+                    }
+                }
+                else
+                {
+                    _logger.LogError($"Cannot add details for a non-existing user: {userName}");
+                    throw new ArgumentException($"Cannot add trip details for a non-existant user: {userName}");
                 }
             }
         }

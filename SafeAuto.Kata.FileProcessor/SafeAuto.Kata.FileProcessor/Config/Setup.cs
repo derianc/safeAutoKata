@@ -18,7 +18,6 @@ namespace SafeAuto.Kata.FileProcessor.Config
                 // configure services
                 .AddSingleton<IFileReaderService, FileReaderService>()
                 .AddSingleton<ITripCalculatorService, TripCalculatorService>()
-                .AddSingleton<IValidationService, ValidationService>()
                 .AddSingleton<IPrintService, PrintService>()
 
                 // configure logging
