@@ -1,6 +1,8 @@
 Trip Dan 07:15 07:45 17.3
 Trip Dan 06:12 06:32 21.8
-Trip Alex 12:01 13:16 42.0
+Trip Alex 12:01 13:16 12.0
+Trip Alex 12:01 13:16 5.1
+Trip Alex 12:01 13:16 58.0
 Example input:
 Driver Dan
 Driver Alex

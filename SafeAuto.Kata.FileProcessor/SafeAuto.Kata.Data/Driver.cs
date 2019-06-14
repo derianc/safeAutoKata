@@ -5,17 +5,23 @@ namespace SafeAuto.Kata.Data
 {
     public class Driver
     {
-        public string UserName { get; set; }
+        public string Name { get; set; }
         public double TotalDistanceTraveled { get; set; }
         public double TotalTripTime { get; set; }
         public double AvgSpeedInMph
         {
             get
             {
-                if (TotalDistanceTraveled > 0 && TotalTripTime > 0)
-                    return TotalDistanceTraveled / TotalTripTime;
-
-                return 0;
+                try
+                {
+                    if (TotalDistanceTraveled > 0 && TotalTripTime > 0)
+                        return TotalDistanceTraveled / TotalTripTime;
+                    return 0;
+                }
+                catch
+                {
+                    return 0;
+                }
             }
         }
 

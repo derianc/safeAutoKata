@@ -13,20 +13,19 @@ namespace SafeAuto.Kata.FileProcessor.Config
         {
             var serviceProvider = new ServiceCollection()
                 // configure repositories
-                .AddSingleton<IUserRepository, UserRepository>()
+                .AddSingleton<IDriverRepository, DriverRepository>()
 
                 // configure services
                 .AddSingleton<IFileReaderService, FileReaderService>()
-                .AddSingleton<ITripCalculatorService, TripCalculatorService>()
                 .AddSingleton<IPrintService, PrintService>()
+                .AddSingleton<IDriverService, DriverService>()
 
                 // configure logging
                 .AddSingleton<ILoggerFactory, LoggerFactory>()
                 .AddSingleton(typeof(ILogger<>), typeof(Logger<>))
                 .AddLogging(loggingBuilder => loggingBuilder
                     .AddDebug()
-                    .SetMinimumLevel(LogLevel.Debug)
-                )
+                    .SetMinimumLevel(LogLevel.Debug))
                 .BuildServiceProvider()
                 ;
 
@@ -38,14 +37,14 @@ namespace SafeAuto.Kata.FileProcessor.Config
             return serviceProvider.GetRequiredService<IFileReaderService>();
         }
 
-        public static ITripCalculatorService GetTripCalculatorService(this ServiceProvider serviceProvider)
-        {
-            return serviceProvider.GetRequiredService<ITripCalculatorService>();
-        }
-
         public static IPrintService GetPrintService(this ServiceProvider serviceProvider)
         {
             return serviceProvider.GetRequiredService<IPrintService>();
+        }
+
+        public static IDriverService GetDriverService(this ServiceProvider serviceProvider)
+        {
+            return serviceProvider.GetRequiredService<IDriverService>();
         }
     }
 }

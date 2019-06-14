@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeAuto.Kata.FileProcessor", "SafeAuto.Kata.FileProcessor\SafeAuto.Kata.FileProcessor.csproj", "{BFE6EE21-434E-4B59-9295-7AE7A23B84A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeAuto.Kata.FileProcessor", "SafeAuto.Kata.FileProcessor\SafeAuto.Kata.FileProcessor.csproj", "{BFE6EE21-434E-4B59-9295-7AE7A23B84A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeAuto.Kata.Data", "SafeAuto.Kata.Data\SafeAuto.Kata.Data.csproj", "{A1BA37C5-55B1-443C-B870-E5726D110B8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeAuto.Kata.Data", "SafeAuto.Kata.Data\SafeAuto.Kata.Data.csproj", "{A1BA37C5-55B1-443C-B870-E5726D110B8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeAuto.Kata.Services", "SafeAuto.Kata.Services\SafeAuto.Kata.Services.csproj", "{2DA89E15-C94B-4276-9333-F3DF35BECE8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeAuto.Kata.Services", "SafeAuto.Kata.Services\SafeAuto.Kata.Services.csproj", "{2DA89E15-C94B-4276-9333-F3DF35BECE8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeAuto.Kata.Repositories", "SafeAuto.Kata.Repositories\SafeAuto.Kata.Repositories.csproj", "{3DF2CDD0-E926-413F-B6E2-A9381C3A3C84}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SafeAuto.Kata.Repositories", "SafeAuto.Kata.Repositories\SafeAuto.Kata.Repositories.csproj", "{3DF2CDD0-E926-413F-B6E2-A9381C3A3C84}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SafeAuto.Kata.Tests", "SafeAuto.Kata.Tests\SafeAuto.Kata.Tests.csproj", "{5F56D64A-0C8F-4C05-AD49-0CD9A7C96A1B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3DF2CDD0-E926-413F-B6E2-A9381C3A3C84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DF2CDD0-E926-413F-B6E2-A9381C3A3C84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DF2CDD0-E926-413F-B6E2-A9381C3A3C84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F56D64A-0C8F-4C05-AD49-0CD9A7C96A1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F56D64A-0C8F-4C05-AD49-0CD9A7C96A1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F56D64A-0C8F-4C05-AD49-0CD9A7C96A1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F56D64A-0C8F-4C05-AD49-0CD9A7C96A1B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

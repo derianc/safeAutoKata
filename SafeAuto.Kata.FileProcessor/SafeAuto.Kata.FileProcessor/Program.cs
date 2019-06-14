@@ -1,9 +1,6 @@
 ﻿using System;
 using System.IO;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using SafeAuto.Kata.FileProcessor.Config;
-using SafeAuto.Kata.Services.Interfaces;
 
 namespace SafeAuto.Kata.FileProcessor
 {
@@ -14,13 +11,9 @@ namespace SafeAuto.Kata.FileProcessor
             // configure DI Containers
             var serviceProvider = Setup.ConfigureDependencyInjection();
 
-            var logger = serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger<Program>();
             var fileReaderService = serviceProvider.GetFileReaderService();
-            var tripCalcService = serviceProvider.GetTripCalculatorService();
             var printService = serviceProvider.GetPrintService();
-
-            logger.LogDebug("Starting Application");
-            //var fp = @"C:\Project\Sandbox\safeAutoKata\exampleFile.txt";
+            var driverService = serviceProvider.GetDriverService();
 
             Console.Write("Enter File Path: ");
             var fp = Console.ReadLine();
@@ -29,10 +22,16 @@ namespace SafeAuto.Kata.FileProcessor
             if (File.Exists(fp))
             {
                 // process input file
-                fileReaderService.ProcessFile(fp);
+                var inputFileDetails = fileReaderService.ProcessFile(fp);
 
-                // cacluclate trip details
-                var driverTripDetails = tripCalcService.CalculateDriverTripDetails();
+                // register drivers
+                driverService.RegisterDrivers(inputFileDetails.DriverDetails);
+
+                // add driver trip details
+                driverService.AddDriverTripDetails(inputFileDetails.TripDetails);
+
+                // cacluclate driver trip details
+                var driverTripDetails = driverService.CalculateDriverTripDetails();
 
                 // get print output
                 printService.PrintDriverTripDetails(driverTripDetails);
@@ -41,7 +40,7 @@ namespace SafeAuto.Kata.FileProcessor
                 Console.ReadLine();
             }
             else
-                logger.LogError($"File does not exist, {fp}");
+                throw new FileNotFoundException($"file, {fp}, not found");
         }
     }
 }

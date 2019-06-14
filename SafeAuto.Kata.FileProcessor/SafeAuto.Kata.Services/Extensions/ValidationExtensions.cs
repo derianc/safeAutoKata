@@ -6,7 +6,7 @@ namespace SafeAuto.Kata.Services.Extensions
 {
     public static class ValidationExtensions
     {
-        public static bool IsCorrectFormatForNewUser(this string[] line, ILogger<FileReaderService> logger)
+        public static bool IsCorrectFormatForNewUser(this string[] line, ILogger<DriverService> logger)
         {
             if (line.Length == 2)
                 return true;
@@ -15,7 +15,7 @@ namespace SafeAuto.Kata.Services.Extensions
             throw new FormatException("Formatting Error");
         }
 
-        public static bool IsCorrectFormatForTripDetails(this string[] line, ILogger<FileReaderService> logger)
+        public static bool IsCorrectFormatForTripDetails(this string[] line, ILogger<DriverService> logger)
         {
             if (line.Length == 5)
                 return true;
