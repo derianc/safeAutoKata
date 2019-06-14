@@ -1,11 +1,11 @@
 Author: Derian Conteh-Morgan, 06/13/2019
 
 The included solution contains 5 projects: 
-  SafeAuto.Kata.Data
-  SafeAuto.Kata.FileProcessor
-  SafeAuto.Kata.Repositories
-  SafeAuto.Kata.Services
-  SafeAuto.Kata.Tests
+  1 SafeAuto.Kata.Data
+  2 SafeAuto.Kata.FileProcessor
+  3 SafeAuto.Kata.Repositories
+  4 SafeAuto.Kata.Services
+  5 SafeAuto.Kata.Tests
 
 Getting Started: 
   Clone GitHub Repository, https://github.com/derianc/safeAutoKata
